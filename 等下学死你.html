@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>幼儿园火箭班数学题解答</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .problem {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .solution {
+            background-color: #eaf7ff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .step {
+            margin-bottom: 15px;
+        }
+        .answer {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            border-left: 5px solid #e74c3c;
+        }
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>幼儿园火箭班数学题解答</h1>
+    
+    <div class="problem">
+        <h2>题目：</h2>
+        <p>在一个椭圆形中（这个椭圆的"胖瘦程度"是√3/2）：</p>
+        <ol>
+            <li>有两个焦点F₁和F₂</li>
+            <li>点P是椭圆上的任意一点</li>
+            <li>角F₁PF₂=60度</li>
+            <li>PF₁的长度比PF₂长3</li>
+        </ol>
+        <p>求：三角形PF₁F₂的面积是多少？</p>
+    </div>
+    
+    <div class="solution">
+        <h2>解答过程：</h2>
+        
+        <div class="step">
+            <h3>第一步：了解椭圆的基本性质</h3>
+            <p>对于标准椭圆：</p>
+            <ul>
+                <li>有两个焦点F₁和F₂，它们之间的距离是2c</li>
+                <li>椭圆上任意一点P到两个焦点的距离之和PF₁+PF₂=2a（a是椭圆的长半轴）</li>
+                <li>题目告诉我们这个椭圆的"胖瘦程度"（离心率）e=√3/2=c/a</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <h3>第二步：设未知数</h3>
+            <p>设：</p>
+            <ul>
+                <li>PF₁ = r₁</li>
+                <li>PF₂ = r₂</li>
+            </ul>
+            <p>根据题目：</p>
+            <ol>
+                <li>r₁ + r₂ = 2a（椭圆性质）</li>
+                <li>r₁ - r₂ = 3（题目条件）</li>
+            </ol>
+            <p>解这个方程组得到：</p>
+            <p>r₁ = a + 1.5</p>
+            <p>r₂ = a - 1.5</p>
+        </div>
+        
+        <div class="step">
+            <h3>第三步：利用三角形性质</h3>
+            <p>在三角形PF₁F₂中：</p>
+            <ul>
+                <li>我们知道F₁F₂=2c=a√3</li>
+                <li>角F₁PF₂=60度</li>
+                <li>边PF₁=r₁=a+1.5</li>
+                <li>边PF₂=r₂=a-1.5</li>
+            </ul>
+            <p>使用余弦定理：</p>
+            <p>F₁F₂² = PF₁² + PF₂² - 2×PF₁×PF₂×cos(60°)</p>
+            <p>代入数值计算后得到：a = 3√6/4 ≈ 1.837</p>
+        </div>
+        
+        <div class="step">
+            <h3>第四步：计算面积</h3>
+            <p>三角形面积公式：</p>
+            <p>面积 = (1/2) × PF₁ × PF₂ × sin(60°)</p>
+            <p>计算得到：</p>
+            <p>PF₁ × PF₂ = 9/8</p>
+            <p>因为sin(60°)=√3/2</p>
+            <p>所以面积 = (1/2) × (9/8) × (√3/2) = 9√3/32</p>
+        </div>
+        
+        <div class="answer">
+            最终答案：三角形的面积是 <span class="highlight">9√3/32</span>（约等于0.487）
+        </div>
+    </div>
+    
+    <div style="margin-top:30px; font-size:14px; color:#666;">
+        <p>说明：</p>
+        <ul>
+            <li>√3 ≈ 1.732</li>
+            <li>9√3/32 ≈ 0.487</li>
+            <li>这个结果看起来很小，是因为我们使用的单位比较特殊</li>
+        </ul>
+    </div>
+</body>
+</html>
