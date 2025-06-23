@@ -1,131 +1,671 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <title>幼儿园火箭班数学题解答</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老登の世界 - 高性能Paper生电生存服务器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #00CED1; /* 青色主题 */
+            --primary-dark: #008B8B; /* 深青色 */
+            --secondary: #FFD700; /* 金色作为点缀色 */
+            --dark: #2F4F4F;
+            --light: #F5FFFA;
+            --gray: #708090;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
         }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
+        
+        /* 导航栏 */
+        .navbar {
+            background-color: var(--primary-dark);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .problem {
-            background-color: #f5f5f5;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .solution {
-            background-color: #eaf7ff;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .step {
-            margin-bottom: 15px;
-        }
-        .answer {
+        
+        .logo {
+            font-size: 1.8rem;
             font-weight: bold;
-            color: #e74c3c;
-            font-size: 18px;
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 5px;
-            border-left: 5px solid #e74c3c;
+            color: var(--white);
+            display: flex;
+            align-items: center;
         }
-        .highlight {
-            background-color: #fffacd;
-            padding: 2px 5px;
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1607513746994-51f730a44832?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 2rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .server-ip-box {
+            background-color: rgba(255,255,255,0.9);
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .server-ip {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .version-support {
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--secondary);
+            color: var(--dark);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        /* 主要内容区域 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+        
+        /* 特征卡片 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            text-align: center;
+            border-top: 5px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+        }
+        
+        /* 如何加入部分 */
+        .how-to-join {
+            background-color: var(--white);
+            padding: 4rem 0;
+        }
+        
+        .steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+        
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .step-content p {
+            color: var(--gray);
+        }
+        
+        /* 服务器规则 */
+        .rules {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 4rem 0;
+        }
+        
+        .rules .section-title h2 {
+            color: var(--white);
+        }
+        
+        .rules-list {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        .rules-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.8;
+        }
+        
+        .rules-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* 更新日志部分 - 特别设计为易于编辑 */
+        .updates {
+            background-color: var(--white);
+            padding: 4rem 0;
+        }
+        
+        .update-log {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .update-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px dashed var(--gray);
+        }
+        
+        .update-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .update-date {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .update-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .update-content {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        .update-content ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .update-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+            text-align: left;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .footer-column p, .footer-column a {
+            color: var(--white);
+            opacity: 0.8;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-column a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            color: var(--white);
+            font-size: 1.5rem;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            opacity: 1;
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+            
+            .step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-bottom: 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>幼儿园火箭班数学题解答</h1>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-server"></i>
+                <span>老登の世界</span>
+            </div>
+            <div class="nav-links">
+                <a href="#about">关于服务器</a>
+                <a href="#join">如何加入</a>
+                <a href="#rules">服务器规则</a>
+                <a href="#updates">更新日志</a>
+            </div>
+        </div>
+    </nav>
     
-    <div class="problem">
-        <h2>题目：</h2>
-        <p>在一个椭圆形中（这个椭圆的"胖瘦程度"是√3/2）：</p>
-        <ol>
-            <li>有两个焦点F₁和F₂</li>
-            <li>点P是椭圆上的任意一点</li>
-            <li>角F₁PF₂=60度</li>
-            <li>PF₁的长度比PF₂长3</li>
-        </ol>
-        <p>求：三角形PF₁F₂的面积是多少？</p>
-    </div>
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>欢迎来到老登の世界</h1>
+            <p>高性能Paper端生电生存服务器 | 支持1.7-1.21.95版本</p>
+            
+            <div class="server-ip-box">
+                <div class="server-ip" onclick="copyToClipboard()">ruigezai.2m.pub</div>
+                <div class="version-support">点击IP地址复制到剪贴板</div>
+            </div>
+            
+            <a href="#join" class="btn btn-primary">如何加入</a>
+            <a href="#rules" class="btn">查看规则</a>
+        </div>
+    </section>
     
-    <div class="solution">
-        <h2>解答过程：</h2>
-        
-        <div class="step">
-            <h3>第一步：了解椭圆的基本性质</h3>
-            <p>对于标准椭圆：</p>
-            <ul>
-                <li>有两个焦点F₁和F₂，它们之间的距离是2c</li>
-                <li>椭圆上任意一点P到两个焦点的距离之和PF₁+PF₂=2a（a是椭圆的长半轴）</li>
-                <li>题目告诉我们这个椭圆的"胖瘦程度"（离心率）e=√3/2=c/a</li>
-            </ul>
+    <!-- 关于服务器 -->
+    <section id="about" class="container">
+        <div class="section-title">
+            <h2>关于服务器</h2>
+            <p>一个专为生电玩家打造的高性能生存服务器</p>
         </div>
         
-        <div class="step">
-            <h3>第二步：设未知数</h3>
-            <p>设：</p>
-            <ul>
-                <li>PF₁ = r₁</li>
-                <li>PF₂ = r₂</li>
-            </ul>
-            <p>根据题目：</p>
-            <ol>
-                <li>r₁ + r₂ = 2a（椭圆性质）</li>
-                <li>r₁ - r₂ = 3（题目条件）</li>
-            </ol>
-            <p>解这个方程组得到：</p>
-            <p>r₁ = a + 1.5</p>
-            <p>r₂ = a - 1.5</p>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>高性能Paper端</h3>
+                <p>采用最新Paper服务端，优化性能，减少延迟，提供流畅的游戏体验。支持1.7到1.21.95的客户端连接。</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>生电玩法</h3>
+                <p>专为生电玩家优化，保留红石特性，支持各种自动化农场和机器，让您的创造力无限发挥。</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>纯净生存</h3>
+                <p>保持原版生存体验，无RPG元素，无付费特权，所有玩家平等，回归Minecraft本质乐趣。</p>
+            </div>
         </div>
-        
-        <div class="step">
-            <h3>第三步：利用三角形性质</h3>
-            <p>在三角形PF₁F₂中：</p>
-            <ul>
-                <li>我们知道F₁F₂=2c=a√3</li>
-                <li>角F₁PF₂=60度</li>
-                <li>边PF₁=r₁=a+1.5</li>
-                <li>边PF₂=r₂=a-1.5</li>
-            </ul>
-            <p>使用余弦定理：</p>
-            <p>F₁F₂² = PF₁² + PF₂² - 2×PF₁×PF₂×cos(60°)</p>
-            <p>代入数值计算后得到：a = 3√6/4 ≈ 1.837</p>
-        </div>
-        
-        <div class="step">
-            <h3>第四步：计算面积</h3>
-            <p>三角形面积公式：</p>
-            <p>面积 = (1/2) × PF₁ × PF₂ × sin(60°)</p>
-            <p>计算得到：</p>
-            <p>PF₁ × PF₂ = 9/8</p>
-            <p>因为sin(60°)=√3/2</p>
-            <p>所以面积 = (1/2) × (9/8) × (√3/2) = 9√3/32</p>
-        </div>
-        
-        <div class="answer">
-            最终答案：三角形的面积是 <span class="highlight">9√3/32</span>（约等于0.487）
-        </div>
-    </div>
+    </section>
     
-    <div style="margin-top:30px; font-size:14px; color:#666;">
-        <p>说明：</p>
-        <ul>
-            <li>√3 ≈ 1.732</li>
-            <li>9√3/32 ≈ 0.487</li>
-            <li>这个结果看起来很小，是因为我们使用的单位比较特殊</li>
-        </ul>
-    </div>
+    <!-- 如何加入 -->
+    <section id="join" class="how-to-join">
+        <div class="container">
+            <div class="section-title">
+                <h2>如何加入服务器</h2>
+                <p>简单三步，立即开始您的冒险</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>启动Minecraft</h3>
+                        <p>确保您的游戏版本在1.7到1.21.95之间，推荐使用最新版本以获得最佳体验。</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>添加服务器</h3>
+                        <p>点击"多人游戏" → "添加服务器"，在服务器地址栏输入: <strong>ruigezai.2m.pub</strong></p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>开始游戏</h3>
+                        <p>选择"老登の世界"服务器并点击"加入服务器"，即可开始您的冒险！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 服务器规则 -->
+    <section id="rules" class="rules">
+        <div class="container">
+            <div class="section-title">
+                <h2>服务器规则</h2>
+                <p>请遵守以下规则，共同维护良好的游戏环境</p>
+            </div>
+            
+            <div class="rules-list">
+                <ul>
+                    <li>禁止使用任何形式的作弊客户端、外挂或利用游戏漏洞</li>
+                    <li>禁止恶意破坏他人建筑、物品或农场</li>
+                    <li>禁止使用侮辱性语言、骚扰其他玩家或发布不当言论</li>
+                    <li>生电机器不得造成服务器严重卡顿，违者可能会被要求修改或拆除</li>
+                    <li>PVP需双方同意，禁止恶意击杀</li>
+                    <li>保持友好交流，共建和谐社区</li>
+                    <li>禁止任何形式的现实货币交易</li>
+                    <li>管理员有权对违规行为进行处理，包括但不限于警告、封禁</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 更新日志 - 这部分特别设计为易于编辑 -->
+    <section id="updates" class="updates">
+        <div class="container">
+            <div class="section-title">
+                <h2>更新日志</h2>
+                <p>服务器最新动态与更新内容</p>
+            </div>
+            
+            <div class="update-log">
+                <!-- 更新项模板 - 复制这段来添加新更新 -->
+                <div class="update-item">
+                    <div class="update-date">2025年6月23日</div>
+                    <h3 class="update-title">114514</h3>
+                    <div class="update-content">
+                        <p>本次更新主要内容：</p>
+                        <ul>
+                            <li>更新了一个官网（没错，就是这个页面(･o･)ﾉYes!!）</li>
+                            <li>更新了更多的Bug</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 您可以复制上面的update-item块来添加更多更新 -->
+                <!-- 只需修改日期、标题和内容即可 -->
+                <!-- 这里是AI教我写的，别管哈 -->
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>关于我们</h3>
+                <p>老登の世界是一个专注于生电玩法的高性能Minecraft服务器，致力于为玩家提供最佳的原版生存体验。</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-qq"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-bilibili"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>快速链接</h3>
+                <a href="#about">关于服务器</a>
+                <a href="#join">如何加入</a>
+                <a href="#rules">服务器规则</a>
+                <a href="#updates">更新日志</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>服务器信息</h3>
+                <p><i class="fas fa-server"></i> 服务器IP: ruigezai.2m.pub</p>
+                <p><i class="fas fa-code-branch"></i> 支持版本: 1.7-1.21.95</p>
+                <p><i class="fas fa-users"></i> 在线人数: --/--</p>
+                <p><i class="fas fa-clock"></i> 运行时间: --/--</p>
+                <!-- 你是不是看到那几条斜杠就想看看逻辑是不是出问题了，其实是根本不会做实时检测，如果你会能不能教教我:) -->
+                <!-- QQ群：957805820 -->
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 老登の世界 Minecraft服务器. 保留所有权利.
+        </div>
+    </footer>
+    
+    <script>
+        // 复制IP地址功能
+        function copyToClipboard() {
+            const ip = 'ruigezai.2m.pub';
+            navigator.clipboard.writeText(ip).then(() => {
+                alert('服务器IP已复制到剪贴板: ' + ip);
+            }).catch(err => {
+                console.error('复制失败: ', err);
+            });
+        }
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
+<!-- 你难道一定要看HTML内容吗，如果你想帮助服务器的前端开发，加入QQ群957805820，别问我为什么要用GitHub，因为没有公网IP，如果你能帮忙宣传一下服务器就更好了，对了，这个服务器的前端页面可以抄，但记得标注原来的前端地址，还有，这个页面其实是AI写的…… -->
 </html>
