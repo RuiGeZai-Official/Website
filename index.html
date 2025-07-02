@@ -416,6 +416,67 @@
             opacity: 0.7;
             font-size: 0.9rem;
         }
+
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .modal-text {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .copy-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+        }
         
         /* 响应式设计 */
         @media (max-width: 768px) {
@@ -626,8 +687,8 @@
                 <h3>关于我们</h3>
                 <p>老登の世界是一个专注于生电玩法的高性能Minecraft服务器，致力于为玩家提供最佳的原版生存体验。</p>
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-qq"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link" onclick="showQQModal()"><i class="fab fa-qq"></i></a>
+                    <a href="#" class="social-link" onclick="showWeChatModal()"><i class="fab fa-weixin"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-bilibili"></i></a>
                 </div>
             </div>
@@ -655,6 +716,29 @@
             &copy; 2025 老登の世界 Minecraft服务器. 保留所有权利.
         </div>
     </footer>
+
+    <!-- QQ弹窗 -->
+    <div id="qqModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('qqModal')">&times;</span>
+            <h3 class="modal-title">QQ联系方式</h3>
+            <p class="modal-text">QQ号: 957805820</p>
+            <button class="copy-btn" onclick="copyText('957805820')">复制QQ号</button>
+        </div>
+    </div>
+
+    <!-- 微信弹窗 -->
+    <div id="weChatModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('weChatModal')">&times;</span>
+            <h3 class="modal-title">微信联系方式</h3>
+            <p class="modal-text">微信号: 你真以为我有啊</p>
+            <button class="copy-btn" onclick="copyText('example123')">你还真敢加</button>
+        </div>
+    </div>
+
+     <a href="https://space.bilibili.com/3546573793397519?spm_id_from=333.1007.0.0" class="social-link"><i class="fab fa-bilibili"></i></a>
+    
     
     <script>
         // 复制IP地址功能
@@ -677,6 +761,39 @@
                 });
             });
         });
+
+        // 显示QQ弹窗
+        function showQQModal() {
+            event.preventDefault();
+            document.getElementById('qqModal').style.display = 'flex';
+        }
+
+        // 显示微信弹窗
+        function showWeChatModal() {
+            event.preventDefault();
+            document.getElementById('weChatModal').style.display = 'flex';
+        }
+
+        // 关闭弹窗
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // 复制文本
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已复制: ' + text);
+            }).catch(err => {
+                console.error('复制失败: ', err);
+            });
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
     </script>
 </body>
 <!-- 你难道一定要看HTML内容吗，如果你想帮助服务器的前端开发，加入QQ群957805820，别问我为什么要用GitHub，因为没有公网IP，如果你能帮忙宣传一下服务器就更好了，对了，这个服务器的前端页面可以抄，但记得标注原来的前端地址，还有，这个页面其实是AI写的…… -->
