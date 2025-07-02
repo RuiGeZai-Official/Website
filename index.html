@@ -478,6 +478,26 @@
             cursor: pointer;
         }
         
+        /* Radmin LAN 提示框 */
+        .radmin-info {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .radmin-info a {
+            color: var(--secondary);
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .radmin-info a:hover {
+            text-decoration: underline;
+        }
+        
         /* 响应式设计 */
         @media (max-width: 768px) {
             .hero h1 {
@@ -611,6 +631,12 @@
                         <p>选择"老登の世界"服务器并点击"加入服务器"，即可开始您的冒险！</p>
                     </div>
                 </div>
+                
+                <div class="radmin-info">
+                    <p>服务器也支持通过 <strong>Radmin LAN</strong> 连接！<br>
+                    下载Radmin VPN: <a href="https://www.radmin-vpn.com/" target="_blank">https://www.radmin-vpn.com/</a><br>
+                    加入网络后，使用局域网IP连接服务器</p>
+                </div>
             </div>
         </div>
     </section>
@@ -668,6 +694,7 @@
                         <ul>
                             <li>更新了一点没用的东西（其实就是下面的Skript脚本，还挺好用，成功保住了我的商店）</li>
                             <li>给服务器添加了Skript脚本</li>
+                            <li>添加了Radmin LAN连接支持</li>
                         </ul>
                     </div>
                 </div>
@@ -698,11 +725,13 @@
                 <a href="#join">如何加入</a>
                 <a href="#rules">服务器规则</a>
                 <a href="#updates">更新日志</a>
+                <a href="https://www.radmin-vpn.com/" target="_blank">Radmin VPN下载</a>
             </div>
             
             <div class="footer-column">
                 <h3>服务器信息</h3>
                 <p><i class="fas fa-server"></i> 服务器IP: ruigezai.2m.pub</p>
+                <p><i class="fas fa-network-wired"></i> Radmin LAN: 支持</p>
                 <p><i class="fas fa-code-branch"></i> 支持版本: 1.7-1.21.5</p>
                 <p><i class="fas fa-users"></i> 在线人数: --/--</p>
                 <p><i class="fas fa-clock"></i> 运行时间: --/--</p>
