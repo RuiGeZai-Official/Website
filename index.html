@@ -3,824 +3,789 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>老登の世界 - 高性能Paper生电生存服务器</title>
+    <title>星尘之息 - Minecraft Java服务器</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #00CED1; /* 青色主题 */
-            --primary-dark: #008B8B; /* 深青色 */
-            --secondary: #FFD700; /* 金色作为点缀色 */
-            --dark: #2F4F4F;
-            --light: #F5FFFA;
-            --gray: #708090;
-            --white: #FFFFFF;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6b8cbc;
+            --accent: #ff6b6b;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4caf50;
+        }
+
         body {
-            background-color: var(--light);
-            color: var(--dark);
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: var(--light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        
-        /* 导航栏 */
-        .navbar {
-            background-color: var(--primary-dark);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .nav-container {
+
+        .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(10, 15, 35, 0.85);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 20px 0;
         }
-        
+
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--white);
             display: flex;
             align-items: center;
+            gap: 15px;
         }
-        
-        .logo i {
-            margin-right: 10px;
-            color: var(--secondary);
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
         }
-        
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 30px;
         }
-        
+
         .nav-links a {
-            color: var(--white);
+            color: var(--light);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
-        
-        /* 英雄区域 */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://img.picui.cn/free/2025/07/02/6864932aaee98.png') no-repeat center center/cover;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-            padding: 0 2rem;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-        
-        .server-ip-box {
-            background-color: rgba(255,255,255,0.9);
-            padding: 1.5rem;
-            border-radius: 8px;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-        
-        .server-ip {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-dark);
-            margin-bottom: 0.5rem;
-        }
-        
-        .version-support {
-            font-size: 1rem;
-            color: var(--dark);
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: var(--secondary);
-            color: var(--dark);
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            margin: 0.5rem;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
-            color: var(--white);
-        }
-        
-        /* 主要内容区域 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary-dark);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
             position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
+            padding: 5px 0;
         }
-        
-        .section-title h2::after {
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background-color: var(--secondary);
-        }
-        
-        /* 特征卡片 */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-        
-        .feature-card {
-            background-color: var(--white);
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-            text-align: center;
-            border-top: 5px solid var(--primary);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .feature-card p {
-            color: var(--gray);
-        }
-        
-        /* 如何加入部分 */
-        .how-to-join {
-            background-color: var(--white);
-            padding: 4rem 0;
-        }
-        
-        .steps {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .step {
-            display: flex;
-            margin-bottom: 2rem;
-            align-items: flex-start;
-            background-color: var(--light);
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-        
-        .step-number {
-            background-color: var(--primary);
-            color: var(--white);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 1.5rem;
-            flex-shrink: 0;
-            font-size: 1.2rem;
-        }
-        
-        .step-content h3 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .step-content p {
-            color: var(--gray);
-        }
-        
-        /* 服务器规则 */
-        .rules {
-            background-color: var(--primary-dark);
-            color: var(--white);
-            padding: 4rem 0;
-        }
-        
-        .rules .section-title h2 {
-            color: var(--white);
-        }
-        
-        .rules-list {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 8px;
-        }
-        
-        .rules-list li {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
-            position: relative;
-            line-height: 1.8;
-        }
-        
-        .rules-list li::before {
-            content: '✓';
-            position: absolute;
             left: 0;
-            color: var(--secondary);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        /* 更新日志部分 - 特别设计为易于编辑 */
-        .updates {
-            background-color: var(--white);
-            padding: 4rem 0;
-        }
-        
-        .update-log {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: var(--light);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .update-item {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px dashed var(--gray);
-        }
-        
-        .update-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .update-date {
-            font-size: 1rem;
-            color: var(--primary);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        .update-title {
-            font-size: 1.5rem;
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
-        
-        .update-content {
-            color: var(--gray);
-            line-height: 1.8;
-        }
-        
-        .update-content ul {
-            margin-left: 1.5rem;
-            margin-top: 0.5rem;
-        }
-        
-        .update-content li {
-            margin-bottom: 0.5rem;
-        }
-        
-        /* 页脚 */
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 4rem 0 2rem;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 0 2rem;
-            text-align: left;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-        }
-        
-        .footer-column p, .footer-column a {
-            color: var(--white);
-            opacity: 0.8;
-            margin-bottom: 0.8rem;
-            display: block;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-        
-        .footer-column a:hover {
-            opacity: 1;
-            color: var(--secondary);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .social-link {
-            color: var(--white);
-            font-size: 1.5rem;
-            opacity: 0.8;
-            transition: all 0.3s;
-        }
-        
-        .social-link:hover {
-            opacity: 1;
-            color: var(--secondary);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            opacity: 0.7;
-            font-size: 0.9rem;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        /* 弹窗样式 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--accent), #ff8e53);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
+            background: url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,100 0,100" fill="rgba(74, 111, 165, 0.1)"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
         }
 
-        .modal-content {
-            background-color: var(--white);
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            position: relative;
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ffffff, #a8edea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .modal-title {
-            font-size: 1.5rem;
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #d0d0e4;
         }
 
-        .modal-text {
+        .server-info {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .server-ip {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .server-version {
             font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
+            color: #a0a0c0;
+            margin-bottom: 25px;
         }
 
         .copy-btn {
-            background-color: var(--primary);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            padding: 12px 25px;
+            border-radius: 30px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         .copy-btn:hover {
-            background-color: var(--primary-dark);
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5rem;
-            color: var(--gray);
-            cursor: pointer;
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: rgba(20, 25, 50, 0.5);
         }
-        
-        /* Radmin LAN 提示框 */
-        .radmin-info {
-            background-color: var(--primary);
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(30, 35, 70, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 2rem;
+        }
+
+        .feature-card p {
+            color: #b0b0d0;
+            font-size: 1.1rem;
+        }
+
+        /* Game Modes */
+        .game-modes {
+            padding: 100px 0;
+        }
+
+        .modes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .mode-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background: rgba(30, 35, 70, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .mode-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .mode-header {
+            padding: 25px;
             text-align: center;
         }
-        
-        .radmin-info a {
-            color: var(--secondary);
-            font-weight: bold;
-            text-decoration: none;
+
+        .survival .mode-header {
+            background: linear-gradient(45deg, #4a6fa5, #6b8cbc);
         }
-        
-        .radmin-info a:hover {
-            text-decoration: underline;
+
+        .tech .mode-header {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
         }
-        
-        /* 响应式设计 */
+
+        .mode-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .mode-content {
+            padding: 25px;
+        }
+
+        .mode-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mode-content li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .mode-content li:last-child {
+            border-bottom: none;
+        }
+
+        .mode-content li i {
+            color: var(--accent);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Update Log Section - 简洁列表样式 */
+        .update-log {
+            padding: 100px 0;
+            background: rgba(20, 25, 50, 0.5);
+        }
+
+        .update-log h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .update-log h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            border-radius: 2px;
+        }
+
+        .update-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .update-item {
+            background: rgba(30, 35, 70, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .update-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .update-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .update-version {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .update-date {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .update-content {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .update-content h4 {
+            margin-bottom: 15px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .update-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .update-content li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .update-content li:last-child {
+            border-bottom: none;
+        }
+
+        .update-content li i {
+            color: var(--accent);
+            margin-right: 10px;
+            margin-top: 5px;
+            min-width: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 15, 35, 0.95);
+            padding: 70px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-column p, .footer-column li {
+            color: #b0b0d0;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-column ul li i {
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .nav-container {
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .update-header {
                 flex-direction: column;
+                align-items: flex-start;
             }
-            
-            .nav-links {
-                margin-top: 1rem;
-                gap: 1rem;
-            }
-            
-            .step {
-                flex-direction: column;
-            }
-            
-            .step-number {
-                margin-bottom: 1rem;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
+        }
+
+        /* Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-server"></i>
-                <span>老登の世界</span>
-            </div>
-            <div class="nav-links">
-                <a href="#about">关于服务器</a>
-                <a href="#join">如何加入</a>
-                <a href="#rules">服务器规则</a>
-                <a href="#updates">更新日志</a>
-            </div>
-        </div>
-    </nav>
-    
-    <!-- 英雄区域 -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>欢迎来到老登の世界</h1>
-            <p>高性能Paper端生电生存服务器 | 支持1.7-1.21.5版本</p>
-            
-            <div class="server-ip-box">
-                <div class="server-ip" onclick="copyToClipboard()">ruigezai.2m.pub</div>
-                <div class="version-support">点击IP地址复制到剪贴板</div>
-            </div>
-            
-            <a href="#join" class="btn btn-primary">如何加入</a>
-            <a href="#rules" class="btn">查看规则</a>
-        </div>
-    </section>
-    
-    <!-- 关于服务器 -->
-    <section id="about" class="container">
-        <div class="section-title">
-            <h2>关于服务器</h2>
-            <p>一个专为生电玩家打造的高性能生存服务器</p>
-        </div>
-        
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <h3>高性能Paper端</h3>
-                <p>采用最新Paper服务端，优化性能，减少延迟，提供流畅的游戏体验。支持1.7到1.21.5的客户端连接。</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h3>生电玩法</h3>
-                <p>专为生电玩家优化，保留红石特性，支持各种自动化农场和机器，让您的创造力无限发挥。</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-leaf"></i>
-                </div>
-                <h3>纯净生存</h3>
-                <p>保持原版生存体验，无RPG元素，无付费特权，所有玩家平等，回归Minecraft本质乐趣。</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 如何加入 -->
-    <section id="join" class="how-to-join">
+    <!-- Header -->
+    <header>
         <div class="container">
-            <div class="section-title">
-                <h2>如何加入服务器</h2>
-                <p>简单三步，立即开始您的冒险</p>
-            </div>
-            
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>启动Minecraft</h3>
-                        <p>确保您的游戏版本在1.7到1.21.5之间，推荐使用最新版本以获得最佳体验。</p>
+            <nav class="navbar">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-meteor"></i>
                     </div>
+                    <div class="logo-text">星尘之息</div>
                 </div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>添加服务器</h3>
-                        <p>点击"多人游戏" → "添加服务器"，在服务器地址栏输入: <strong>ruigezai.2m.pub</strong></p>
-                    </div>
+                <div class="nav-links">
+                    <a href="#home">首页</a>
+                    <a href="#features">特色</a>
+                    <a href="#modes">游戏模式</a>
+                    <a href="#updates">更新日志</a>
+                    <a href="#contact">联系</a>
                 </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>开始游戏</h3>
-                        <p>选择"老登の世界"服务器并点击"加入服务器"，即可开始您的冒险！</p>
-                    </div>
-                </div>
-                
-                <div class="radmin-info">
-                    <p>服务器也支持通过 <strong>Radmin LAN</strong> 连接！<br>
-                    下载Radmin VPN: <a href="https://www.radmin-vpn.com/" target="_blank">https://www.radmin-vpn.com/</a><br>
-                    加入网络后，使用局域网IP（26.97.64.118:25565）连接服务器</p>
-                </div>
-            </div>
+                <button class="cta-button">立即加入</button>
+            </nav>
         </div>
-    </section>
-    
-    <!-- 服务器规则 -->
-    <section id="rules" class="rules">
-        <div class="container">
-            <div class="section-title">
-                <h2>服务器规则</h2>
-                <p>请遵守以下规则，共同维护良好的游戏环境</p>
-            </div>
-            
-            <div class="rules-list">
-                <ul>
-                    <li>禁止使用任何形式的作弊客户端、外挂或利用游戏漏洞</li>
-                    <li>禁止恶意破坏他人建筑、物品或农场</li>
-                    <li>禁止使用侮辱性语言、骚扰其他玩家或发布不当言论</li>
-                    <li>生电机器不得造成服务器严重卡顿，违者可能会被要求修改或拆除</li>
-                    <li>PVP需双方同意，禁止恶意击杀</li>
-                    <li>保持友好交流，共建和谐社区</li>
-                    <li>禁止任何形式的现实货币交易</li>
-                    <li>管理员有权对违规行为进行处理，包括但不限于警告、封禁</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 更新日志 - 这部分特别设计为易于编辑 -->
-    <section id="updates" class="updates">
-        <div class="container">
-            <div class="section-title">
-                <h2>更新日志</h2>
-                <p>服务器最新动态与更新内容</p>
-            </div>
-            
-            <div class="update-log">
-                <!-- 更新项模板 - 复制这段来添加新更新 -->
-                <div class="update-item">
-                    <div class="update-date">2025年6月23日</div>
-                    <h3 class="update-title">大更新</h3>
-                    <div class="update-content">
-                        <p>本次更新主要内容：</p>
-                        <ul>
-                            <li>更新了一个官网（没错，就是这个页面(･o･)ﾉYes!!）</li>
-                            <li>更新了更多的Bug（开个玩笑，其实根本没新添Bugφ(*￣0￣)）</li>
-                        </ul>
-                    </div>
-                </div>
+    </header>
 
-                <div class="update-item">
-                    <div class="update-date">2025年7月2日</div>
-                    <h3 class="update-title">服务器的小更新</h3>
-                    <div class="update-content">
-                        <p>本次更新主要内容：</p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>星尘之息 - Minecraft服务器</h1>
+            <p>体验最纯净的生存与生电玩法，支持1.7-1.21.5全版本，Paper端优化，流畅稳定的游戏体验</p>
+            
+            <div class="server-info">
+                <div class="server-ip">服务器地址: ruigezai.2m.pub</div>
+                <div class="server-version">支持版本: 1.7 - 1.21.5</div>
+                <button class="copy-btn" onclick="copyIP()">复制服务器地址</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">服务器特色</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>高性能优化</h3>
+                    <p>采用Paper端核心，优化服务器性能，提供流畅稳定的游戏体验，低延迟高TPS。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>友好社区</h3>
+                    <p>活跃的玩家社区，友善的游戏环境，定期举办活动，丰富的社交体验。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>安全保障</h3>
+                    <p>完善的反作弊系统，定期备份，保障玩家数据安全，公平的游戏环境。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>版本兼容</h3>
+                    <p>支持从1.7到1.21.5的所有版本，满足不同玩家的需求，随时加入游戏。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>丰富玩法</h3>
+                    <p>生存与生电双模式，自定义插件，独特玩法，持续更新内容。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>技术支持</h3>
+                    <p>专业的技术支持团队，7x24小时在线，快速响应玩家问题。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Modes -->
+    <section class="game-modes" id="modes">
+        <div class="container">
+            <h2 class="section-title">游戏模式</h2>
+            <div class="modes-container">
+                <div class="mode-card survival">
+                    <div class="mode-header">
+                        <h3>生存模式</h3>
+                        <p>Classic Survival Experience</p>
+                    </div>
+                    <div class="mode-content">
                         <ul>
-                            <li>更新了一点没用的东西（其实就是下面的Skript脚本，还挺好用，成功保住了我的商店）</li>
-                            <li>给服务器添加了Skript脚本</li>
-                            <li>添加了Radmin LAN连接支持</li>
+                            <li><i class="fas fa-check-circle"></i> 原版生存体验，无修改</li>
+                            <li><i class="fas fa-check-circle"></i> 自由建造与探索</li>
+                            <li><i class="fas fa-check-circle"></i> 玩家交易系统</li>
+                            <li><i class="fas fa-check-circle"></i> 定期举办生存挑战活动</li>
+                            <li><i class="fas fa-check-circle"></i> 领地保护系统</li>
+                            <li><i class="fas fa-check-circle"></i> 友好的PvP环境</li>
                         </ul>
                     </div>
                 </div>
                 
-                <!-- 您可以复制上面的update-item块来添加更多更新 -->
-                <!-- 只需修改日期、标题和内容即可 -->
-                <!-- 这里是AI教我写的，别管哈 -->
-                
+                <div class="mode-card tech">
+                    <div class="mode-header">
+                        <h3>生电模式</h3>
+                        <p>Technical & Redstone</p>
+                    </div>
+                    <div class="mode-content">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 红石科技创作平台</li>
+                            <li><i class="fas fa-check-circle"></i> 无限创造资源</li>
+                            <li><i class="fas fa-check-circle"></i> 高级红石组件</li>
+                            <li><i class="fas fa-check-circle"></i> 生电作品展示区</li>
+                            <li><i class="fas fa-check-circle"></i> 技术交流社区</li>
+                            <li><i class="fas fa-check-circle"></i> 定期举办生电比赛</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    
-    <!-- 页脚 -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>关于我们</h3>
-                <p>老登の世界是一个专注于生电玩法的高性能Minecraft服务器，致力于为玩家提供最佳的原版生存体验。</p>
-                <div class="social-links">
-                    <a href="#" class="social-link" onclick="showQQModal()"><i class="fab fa-qq"></i></a>
-                    <a href="#" class="social-link" onclick="showWeChatModal()"><i class="fab fa-weixin"></i></a>
+
+    <!-- Update Log Section - 简洁列表样式 -->
+    <section class="update-log" id="updates">
+        <div class="container">
+            <h2 class="section-title">服务器更新日志</h2>
+            <div class="update-list">
+                <!-- 更新日志项目 - 编程小白只需复制这个结构并修改内容即可 -->
+                <div class="update-item">
+                    <div class="update-header">
+                        <div class="update-version">v1.1.0</div>
+                        <div class="update-date">2025.7.28</div>
+                    </div>
+                    <div class="update-content">
+                        <h4>官网更新</h4>
+                        <ul>
+                            <li><i class="fas fa-plus-circle"></i>美化了官网</li>
+                            <li><i class="fas fa-wrench"></i>修复了服务器太流畅的问题</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            
-            <div class="footer-column">
-                <h3>快速链接</h3>
-                <a href="#about">关于服务器</a>
-                <a href="#join">如何加入</a>
-                <a href="#rules">服务器规则</a>
-                <a href="#updates">更新日志</a>
-                <a href="https://www.radmin-vpn.com/" target="_blank">Radmin VPN下载</a>
-            </div>
-            
-            <div class="footer-column">
-                <h3>服务器信息</h3>
-                <p><i class="fas fa-server"></i> 服务器IP: ruigezai.2m.pub</p>
-                <p><i class="fas fa-network-wired"></i> Radmin LAN: 支持</p>
-                <p><i class="fas fa-code-branch"></i> 支持版本: 1.7-1.21.5</p>
-                <p><i class="fas fa-users"></i> 在线人数: --/--</p>
-                <p><i class="fas fa-clock"></i> 运行时间: --/--</p>
-                <!-- 你是不是看到那几条斜杠就想看看逻辑是不是出问题了，其实是根本不会做实时检测，如果你会能不能教教我:) -->
-                <!-- QQ群：957805820 -->
-            </div>
         </div>
-        
-        <div class="copyright">
-            &copy; 2025 老登の世界 Minecraft服务器. 保留所有权利.
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>星尘之息</h3>
+                    <p>一个专注于提供高质量Minecraft游戏体验的服务器。我们致力于为玩家创造一个稳定、公平、有趣的游戏环境。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-qq"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-bilibili"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#home">首页</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#features">服务器特色</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#modes">游戏模式</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#updates">更新日志</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#">规则说明</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>联系方式</h3>
+                    <ul>
+                        <li><i class="fas fa-server"></i> 服务器IP: ruigezai.2m.pub</li>
+                        <li><i class="fas fa-globe"></i> 支持版本: 1.7 - 1.21.5</li>
+                        <li><i class="fas fa-users"></i> QQ群: 957805820</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 位置: 中国</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- QQ弹窗 -->
-    <div id="qqModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('qqModal')">&times;</span>
-            <h3 class="modal-title">QQ联系方式</h3>
-            <p class="modal-text">QQ号: 957805820</p>
-            <button class="copy-btn" onclick="copyText('957805820')">复制QQ号</button>
-        </div>
-    </div>
-
-    <!-- 微信弹窗 -->
-    <div id="weChatModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('weChatModal')">&times;</span>
-            <h3 class="modal-title">微信联系方式</h3>
-            <p class="modal-text">微信号: 你真以为我有啊</p>
-            <button class="copy-btn" onclick="copyText('你还真敢加')">复制微信号</button>
-        </div>
-    </div>
-    
-    
     <script>
-        // 复制IP地址功能
-        function copyToClipboard() {
-            const ip = 'ruigezai.2m.pub';
+        // Copy IP to clipboard
+        function copyIP() {
+            const ip = "ruigezai.2m.pub";
             navigator.clipboard.writeText(ip).then(() => {
-                alert('服务器IP已复制到剪贴板: ' + ip);
+                alert("服务器地址已复制到剪贴板！");
             }).catch(err => {
                 console.error('复制失败: ', err);
             });
         }
-        
-        // 平滑滚动
+
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
             });
         });
 
-        // 显示QQ弹窗
-        function showQQModal() {
-            event.preventDefault();
-            document.getElementById('qqModal').style.display = 'flex';
-        }
-
-        // 显示微信弹窗
-        function showWeChatModal() {
-            event.preventDefault();
-            document.getElementById('weChatModal').style.display = 'flex';
-        }
-
-        // 关闭弹窗
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        // 复制文本
-        function copyText(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('已复制: ' + text);
-            }).catch(err => {
-                console.error('复制失败: ', err);
-            });
-        }
-
-        // 点击模态框外部关闭
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = 'none';
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(10, 15, 35, 0.95)';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+            } else {
+                header.style.background = 'rgba(10, 15, 35, 0.85)';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
             }
-        }
+        });
     </script>
 </body>
-<!-- 你难道一定要看HTML内容吗，如果你想帮助服务器的前端开发，加入QQ群957805820，别问我为什么要用GitHub，因为没有公网IP，如果你能帮忙宣传一下服务器就更好了，对了，这个服务器的前端页面可以抄，但记得标注原来的前端地址，还有，这个页面其实是AI写的…… -->
 </html>
