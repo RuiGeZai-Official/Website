@@ -94,21 +94,6 @@
         .nav-links a:hover::after {
             width: 100%;
         }
-        .cta-button {
-            background: linear-gradient(45deg, var(--accent), #ff8e53);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-        }
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
-        }
         /* Hero Section */
         .hero {
             padding: 180px 0 100px;
@@ -230,6 +215,66 @@
         .feature-card p {
             color: #b0b0d0;
             font-size: 1.1rem;
+        }
+        /* Game Modes */
+        .game-modes {
+            padding: 100px 0;
+        }
+        .modes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .mode-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background: rgba(30, 35, 70, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .mode-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        .mode-header {
+            padding: 25px;
+            text-align: center;
+        }
+        .survival .mode-header {
+            background: linear-gradient(45deg, #4a6fa5, #6b8cbc);
+        }
+        .tech .mode-header {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+        }
+        .mode-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .mode-content {
+            padding: 25px;
+        }
+        .mode-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .mode-content li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        .mode-content li:last-child {
+            border-bottom: none;
+        }
+        .mode-content li i {
+            color: var(--accent);
+            margin-right: 10px;
+            font-size: 1.2rem;
         }
         /* Update Log Section - 简洁列表样式 */
         .update-log {
@@ -362,48 +407,6 @@
             color: var(--accent);
             margin-right: 10px;
         }
-        
-        /* 美化后的快速链接样式 */
-        .quick-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .quick-link-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 15px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .quick-link-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .quick-link-item a {
-            color: #b0b0d0;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .quick-link-item a:hover {
-            color: var(--accent);
-        }
-        
-        .quick-link-item i {
-            color: var(--accent);
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-        }
-        
         .social-links {
             display: flex;
             gap: 15px;
@@ -473,10 +476,10 @@
                 <div class="nav-links">
                     <a href="#home">首页</a>
                     <a href="#features">特色</a>
+                    <a href="#modes">游戏模式</a>
                     <a href="#updates">更新日志</a>
                     <a href="#contact">联系</a>
                 </div>
-                <button class="cta-button">立即加入</button>
             </nav>
         </div>
     </header>
@@ -542,6 +545,40 @@
             </div>
         </div>
     </section>
+    <!-- Game Modes -->
+    <section class="game-modes" id="modes">
+        <div class="container">
+            <h2 class="section-title">游戏模式</h2>
+            <div class="modes-container">
+                <div class="mode-card survival">
+                    <div class="mode-header">
+                        <h3>生存模式</h3>
+                        <p>Classic Survival Experience</p>
+                    </div>
+                    <div class="mode-content">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 原版生存体验，无修改</li>
+                            <li><i class="fas fa-check-circle"></i> 自由建造与探索</li>
+                            <li><i class="fas fa-check-circle"></i> 玩家交易系统</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mode-card tech">
+                    <div class="mode-header">
+                        <h3>生电模式</h3>
+                        <p>Technical & Redstone</p>
+                    </div>
+                    <div class="mode-content">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 生电作品展示区</li>
+                            <li><i class="fas fa-check-circle"></i> 技术交流社区</li>
+                            <li><i class="fas fa-check-circle"></i> 定期举办生电比赛（一等就是一辈子）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Update Log Section - 简洁列表样式 -->
     <section class="update-log" id="updates">
         <div class="container">
@@ -580,23 +617,13 @@
                 </div>
                 <div class="footer-column">
                     <h3>快速链接</h3>
-                    <div class="quick-links">
-                        <div class="quick-link-item">
-                            <a href="#home"><i class="fas fa-home"></i> 首页</a>
-                        </div>
-                        <div class="quick-link-item">
-                            <a href="#features"><i class="fas fa-star"></i> 服务器特色</a>
-                        </div>
-                        <div class="quick-link-item">
-                            <a href="#updates"><i class="fas fa-history"></i> 更新日志</a>
-                        </div>
-                        <div class="quick-link-item">
-                            <a href="#"><i class="fas fa-book"></i> 规则说明</a>
-                        </div>
-                        <div class="quick-link-item">
-                            <a href="#"><i class="fas fa-comments"></i> 玩家论坛</a>
-                        </div>
-                    </div>
+                    <ul>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#home">首页</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#features">服务器特色</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#modes">游戏模式</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#updates">更新日志</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#">规则说明</a></li>
+                    </ul>
                 </div>
                 <div class="footer-column">
                     <h3>联系方式</h3>
