@@ -3,342 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>星尘之息 - 我的世界Paper服务器</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>老登の世界 - Minecraft Leaves服务器</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Noto Sans SC', sans-serif;
-        }
-        
-        .gradient-bg {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
         }
-        
-        .minecraft-text {
-            text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
         }
-        
-        .hover-scale {
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        header {
+            position: relative;
+            text-align: center;
+            padding: 100px 20px 60px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 40px rgba(255, 255, 255, 0.8); }
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .server-info {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease;
         }
-        
-        .hover-scale:hover {
+
+        .server-info:hover {
+            transform: translateY(-5px);
+        }
+
+        .ip-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .ip-address {
+            font-size: 2em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
-        .block-pattern {
-            background-image: 
-                linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
         }
-        
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
         }
-        
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+
+        .feature-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .feature-desc {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin: 10px 5px;
+            border: 1px solid #ffd700;
+            font-weight: bold;
+        }
+
+        .log-container {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .update-log {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .update-log::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .update-log::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .update-log::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .update-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffd700;
+            transition: all 0.3s ease;
+        }
+
+        .update-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .update-date {
+            color: #ffd700;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .update-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .update-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .update-list li {
+            padding: 8px 0;
+            line-height: 1.6;
+            opacity: 0.9;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .update-list li:last-child {
+            border-bottom: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .ip-address {
+                font-size: 1.2em;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <!-- 导航栏 -->
-    <nav class="fixed top-0 w-full bg-gray-900/90 backdrop-blur-md z-50 border-b border-gray-800">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-cube text-purple-500 text-2xl"></i>
-                    <span class="text-xl font-bold">星尘之息</span>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="hover:text-purple-400 transition">首页</a>
-                    <a href="#features" class="hover:text-purple-400 transition">服务器特色</a>
-                    <a href="#modes" class="hover:text-purple-400 transition">游戏模式</a>
-                    <a href="#versions" class="hover:text-purple-400 transition">版本支持</a>
-                    <a href="#contact" class="hover:text-purple-400 transition">联系我们</a>
-                </div>
-                <button class="md:hidden" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-        </div>
-        <!-- 移动端菜单 -->
-        <div id="mobileMenu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
-            <div class="px-6 py-4 space-y-3">
-                <a href="#home" class="block hover:text-purple-400 transition">首页</a>
-                <a href="#features" class="block hover:text-purple-400 transition">服务器特色</a>
-                <a href="#modes" class="block hover:text-purple-400 transition">游戏模式</a>
-                <a href="#versions" class="block hover:text-purple-400 transition">版本支持</a>
-                <a href="#contact" class="block hover:text-purple-400 transition">联系我们</a>
-            </div>
-        </div>
-    </nav>
+<body>
+    <div class="stars" id="stars"></div>
 
-    <!-- 主页英雄区域 -->
-    <section id="home" class="min-h-screen flex items-center justify-center gradient-bg block-pattern relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/30"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 minecraft-text floating">
-                    星尘之息
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 text-gray-200">
-                    我的世界Paper端Java服务器
-                </p>
-                <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 max-w-md mx-auto mb-8 hover-scale">
-                    <p class="text-sm text-gray-300 mb-2">服务器IP</p>
-                    <p class="text-2xl font-mono font-bold text-yellow-300" id="serverIP">ruigezai.2m.pub</p>
-                    <button onclick="copyIP()" class="mt-3 bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition">
-                        <i class="fas fa-copy mr-2"></i>复制IP
-                    </button>
-                </div>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <div class="bg-green-600/80 px-4 py-2 rounded-lg">
-                        <i class="fas fa-server mr-2"></i>高性能Paper端
-                    </div>
-                    <div class="bg-blue-600/80 px-4 py-2 rounded-lg">
-                        <i class="fas fa-users mr-2"></i>友好社区
-                    </div>
-                    <div class="bg-orange-600/80 px-4 py-2 rounded-lg">
-                        <i class="fas fa-shield-alt mr-2"></i>稳定运行
-                    </div>
-                </div>
-            </div>
+    <header>
+        <h1>🎮 老登の世界 🎮</h1>
+        <p class="subtitle">欢迎来到我们的 Minecraft Leaves 服务器</p>
+        <div>
+            <span class="version-badge">1.17 - 1.21.8</span>
+            <span class="version-badge">Leaves 核心</span>
         </div>
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i class="fas fa-chevron-down text-3xl"></i>
-        </div>
-    </section>
+    </header>
 
-    <!-- 服务器特色 -->
-    <section id="features" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 scroll-reveal">服务器特色</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-gray-700 rounded-lg p-6 hover-scale scroll-reveal">
-                    <div class="text-purple-500 text-4xl mb-4">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">极致性能</h3>
-                    <p class="text-gray-300">采用Paper服务端，优化了原版性能，提供流畅的游戏体验，支持大量玩家同时在线。</p>
-                </div>
-                <div class="bg-gray-700 rounded-lg p-6 hover-scale scroll-reveal">
-                    <div class="text-green-500 text-4xl mb-4">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">纯净体验</h3>
-                    <p class="text-gray-300">坚持原版游戏体验，不添加破坏平衡的插件，让每个玩家都能享受真正的我的世界。</p>
-                </div>
-                <div class="bg-gray-700 rounded-lg p-6 hover-scale scroll-reveal">
-                    <div class="text-blue-500 text-4xl mb-4">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">友好社区</h3>
-                    <p class="text-gray-300">拥有活跃的管理团队和友善的玩家社区，新手友好，老玩家热情互助。</p>
-                </div>
+    <div class="container">
+        <div class="server-info">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2em;">🌟 服务器地址 🌟</h2>
+            <div class="ip-box">
+                <p style="margin-bottom: 10px; opacity: 0.8;">服务器IP地址：</p>
+                <p class="ip-address" id="serverIp">ruigezai.2m.pub</p>
+                <button class="copy-btn" onclick="copyIP()">📋 复制IP地址</button>
             </div>
+            <p style="text-align: center; margin-top: 20px; opacity: 0.9;">
+                支持 Minecraft Java版 1.17 至 1.21.8 全版本进入
+            </p>
         </div>
-    </section>
 
-    <!-- 游戏模式 -->
-    <section id="modes" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 scroll-reveal">游戏模式</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg p-8 scroll-reveal">
-                    <h3 class="text-2xl font-bold mb-4">
-                        <i class="fas fa-cogs mr-3"></i>生电模式
-                    </h3>
-                    <p class="mb-4">为红石工程师和创造家们打造的专属空间，在这里你可以：</p>
-                    <ul class="space-y-2 text-gray-200">
-                        <li><i class="fas fa-check-circle mr-2"></i>自由建造大型红石装置</li>
-                        <li><i class="fas fa-check-circle mr-2"></i>探索无限可能的机械设计</li>
-                        <li><i class="fas fa-check-circle mr-2"></i>与其他玩家交流技术心得</li>
-                        <li><i class="fas fa-check-circle mr-2"></i>参与定期举办的生电比赛</li>
-                    </ul>
-                </div>
-                <div class="bg-gradient-to-br from-green-600 to-teal-600 rounded-lg p-8 scroll-reveal">
-                    <h3 class="text-2xl font-bold mb-4">
-                        <i class="fas fa-tree mr-3"></i>生存模式
-                    </h3>
-                    <p class="mb-4">体验原汁原味的生存冒险，探索未知的世界：</p>
-                    <ul class="space-y-2 text-gray-200">
-                        <li><i class="fas fa-check-circle mr-2"></i>纯净的生存体验，无作弊</li>
-                        <li><i class="fas fa-check-circle mr-2"></i>保护领地系统，安心建造</li>
-                        <li><i class="fas fa-check-circle mr-2"></i>经济系统，玩家间交易</li>
-                        <li><i class="fas fa-check-circle mr-2"></i>定期活动，丰富游戏体验</li>
-                    </ul>
-                </div>
+        <div class="server-info">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2em;">💬 加入我们的社区 💬</h2>
+            <div class="ip-box">
+                <p style="margin-bottom: 10px; opacity: 0.8;">官方QQ群：</p>
+                <p class="ip-address" id="qqGroup">957805820</p>
+                <button class="copy-btn" onclick="copyQQ()">📋 复制群号</button>
             </div>
+            <p style="text-align: center; margin-top: 20px; opacity: 0.9;">
+                加入QQ群与其他玩家交流互动，获取最新服务器资讯
+            </p>
         </div>
-    </section>
 
-    <!-- 版本支持 -->
-    <section id="versions" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 scroll-reveal">版本支持</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-gray-700 rounded-lg p-8 text-center scroll-reveal">
-                    <div class="text-6xl mb-6">
-                        <i class="fas fa-code-branch text-purple-500"></i>
-                    </div>
-                    <p class="text-xl mb-6">支持从 1.7 到 1.21.6 的所有版本</p>
-                    <div class="grid grid-cols-3 md:grid-cols-6 gap-4 text-sm">
-                        <div class="bg-gray-600 rounded px-3 py-2">1.7.x</div>
-                        <div class="bg-gray-600 rounded px-3 py-2">1.8.x</div>
-                        <div class="bg-gray-600 rounded px-3 py-2">1.12.x</div>
-                        <div class="bg-gray-600 rounded px-3 py-2">1.16.x</div>
-                        <div class="bg-gray-600 rounded px-3 py-2">1.20.x</div>
-                        <div class="bg-purple-600 rounded px-3 py-2">1.21.6</div>
-                    </div>
-                    <p class="mt-6 text-gray-300">无论你使用哪个版本的客户端，都能加入我们的服务器！</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 联系我们 -->
-    <section id="contact" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 scroll-reveal">联系我们</h2>
-            <div class="max-w-2xl mx-auto">
-                <div class="bg-gray-800 rounded-lg p-8 scroll-reveal">
-                    <div class="grid md:grid-cols-1 gap-6">
-                        <div class="text-center">
-                            <div class="bg-purple-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                                <i class="fab fa-qq text-2xl"></i>
-                            </div>
-                            <h3 class="text-lg font-bold mb-2">QQ群</h3>
-                            <p class="text-gray-400">加入QQ群获取最新资讯</p>
-                            <p class="text-purple-400 font-mono mt-2">957805820</p>
-                        </div>
-                    </div>
-                    <div class="mt-8 text-center">
-                        <p class="text-gray-400 mb-4">有任何问题或建议？欢迎随时联系我们！</p>
-                        <button class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-8 py-3 rounded-lg transition transform hover:scale-105">
-                            <i class="fas fa-envelope mr-2"></i>发送邮件
-                        </button>
+        <div class="server-info">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2em;">📋 服务器更新日志</h2>
+            <div class="log-container">
+                <div class="update-log">
+                    <div class="update-item">
+                        <div class="update-date">2025年9月29日</div>
+                        <div class="update-title">官网更新</div>
+                        <ul class="update-list">
+                            <li>更新了官网</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- 页脚 -->
-    <footer class="bg-gray-800 border-t border-gray-700 py-8">
-        <div class="container mx-auto px-6 text-center">
-            <div class="flex items-center justify-center space-x-2 mb-4">
-                <i class="fas fa-cube text-purple-500"></i>
-                <span class="text-xl font-bold">星尘之息</span>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3 class="feature-title">高性能运行</h3>
+                <p class="feature-desc">采用 Leaves 核心，优化性能，流畅游戏体验，支持多版本兼容</p>
             </div>
-            <p class="text-gray-400">© 2025 星尘之息 我的世界服务器. All rights reserved.</p>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3 class="feature-title">多版本支持</h3>
+                <p class="feature-desc">完美支持 1.17 到 1.21.8 全版本，无论你使用哪个版本都能畅玩</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3 class="feature-title">友好社区</h3>
+                <p class="feature-desc">热情友善的玩家社区，一起建造、冒险、创造属于我们的世界</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3 class="feature-title">稳定安全</h3>
+                <p class="feature-desc">24小时稳定运行，完善的反作弊系统，保护每一位玩家的游戏体验</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">丰富玩法</h3>
+                <p class="feature-desc">生存、建筑、冒险多种玩法，定期举办活动，永不枯燥</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">快速响应</h3>
+                <p class="feature-desc">专业运维团队，及时处理问题，确保最佳游戏环境</p>
+            </div>
         </div>
+    </div>
+
+    <footer>
+        <p style="font-size: 1.2em; margin-bottom: 10px;">🎮 老登の世界 - 你的 Minecraft 冒险从这里开始 🎮</p>
+        <p style="opacity: 0.7;">© 2025 老登の世界 Minecraft 服务器 | Powered by Leaves</p>
     </footer>
 
-    <!-- 返回顶部按钮 -->
-    <button id="backToTop" class="fixed bottom-8 right-8 bg-purple-600 hover:bg-purple-700 w-12 h-12 rounded-full shadow-lg transition transform hover:scale-110 hidden">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <script>
-        // 移动端菜单切换
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
+        // 创建星空效果
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
         }
 
-        // 复制IP功能
+        // 复制IP地址功能
         function copyIP() {
-            const ip = document.getElementById('serverIP').textContent;
+            const ip = document.getElementById('serverIp').textContent;
             navigator.clipboard.writeText(ip).then(() => {
-                // 显示复制成功提示
-                const button = event.target.closest('button');
-                const originalText = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check mr-2"></i>已复制';
-                button.classList.add('bg-green-600');
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ 已复制!';
+                btn.style.background = 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)';
+                
                 setTimeout(() => {
-                    button.innerHTML = originalText;
-                    button.classList.remove('bg-green-600');
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
                 }, 2000);
+            }).catch(err => {
+                alert('复制失败，请手动复制：' + ip);
             });
         }
 
-        // 滚动显示动画
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+        // 复制QQ群号功能
+        function copyQQ() {
+            const qq = document.getElementById('qqGroup').textContent;
+            navigator.clipboard.writeText(qq).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ 已复制!';
+                btn.style.background = 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+                }, 2000);
+            }).catch(err => {
+                alert('复制失败，请手动复制：' + qq);
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            observer.observe(el);
-        });
-
-        // 返回顶部按钮
-        const backToTopButton = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.remove('hidden');
-            } else {
-                backToTopButton.classList.add('hidden');
-            }
-        });
-
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // 关闭移动端菜单
-                    document.getElementById('mobileMenu').classList.add('hidden');
-                }
-            });
-        });
-
-        // 页面加载动画
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
-        });
+        }
     </script>
 </body>
 </html>
